@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useInView } from "@/hooks/use-in-view";
 import {
   BeliefScene,
@@ -24,7 +25,10 @@ export default function AboutPage() {
       {/* Scene 3: Perspective - Origin Story */}
       <OriginStory />
 
-      {/* Scene 4: Proof of Character */}
+      {/* Scene 4: CEO Profile */}
+      <CEOProfile />
+
+      {/* Scene 5: Proof of Character */}
       <CharacterProof />
 
       {/* Scene 5: Invitation - Human CTA */}
@@ -114,8 +118,88 @@ function AboutArrival() {
   );
 }
 
-// Scene 4: Character Proof - Single powerful quote about working relationship
-function CharacterProof() {
+// Scene 4: CEO Profile with Photo
+function CEOProfile() {
+  const [ref, isInView] = useInView({ threshold: 0.3 });
+
+  return (
+    <section
+      ref={ref}
+      className="min-h-[70vh] flex items-center justify-center px-6 md:px-12 py-24 md:py-32 bg-gradient-to-b from-[#FDFBF7] to-white"
+    >
+      <div className="max-w-4xl mx-auto w-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* CEO Photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/ceo.jpeg"
+                alt="Pavan Kumar, Founder & CEO"
+                fill
+                className="object-cover object-center"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            {/* Decorative corner accent */}
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-full opacity-30 blur-2xl" />
+          </motion.div>
+
+          {/* CEO Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-blue-600 mb-4">
+                Meet our founder
+              </p>
+              <h2
+                className="text-3xl md:text-4xl text-gray-900 mb-4"
+                style={{ fontFamily: "var(--font-crimson)" }}
+              >
+                Pavan Kumar
+              </h2>
+              <p className="text-lg text-gray-600">Founder & CEO</p>
+            </div>
+
+            <p className="text-gray-700 leading-relaxed text-lg">
+              With a background in GST compliance and a frustration with manual processes, Pavan founded Krupa Consultancy to solve the exact problems that CAs face every day.
+            </p>
+
+            <p className="text-gray-700 leading-relaxed text-lg">
+              Today, he's obsessed with building tools that feel less like software and more like a trusted colleague. Someone who handles the tedious stuff while you focus on what actually matters.
+            </p>
+
+            <div className="pt-6 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
+                <span className="text-gray-600">15+ years in GST & tax automation</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
+                <span className="text-gray-600">Trusted by 500+ CA firms</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
+                <span className="text-gray-600">Passionate about reducing busywork</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Scene 5: Proof of Character
   const [ref, isInView] = useInView({ threshold: 0.3 });
 
   return (
@@ -175,7 +259,7 @@ function CharacterProof() {
   );
 }
 
-// Scene 5: About-specific Invitation
+// Scene 6: About-specific Invitation
 function AboutInvitation() {
   const [ref, isInView] = useInView({ threshold: 0.3 });
 
