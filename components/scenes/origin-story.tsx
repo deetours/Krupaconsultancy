@@ -22,7 +22,7 @@ const defaultParagraphs = [
 export function OriginStory({
   headline = "A midnight filing that changed everything",
   paragraphs = defaultParagraphs,
-  founderName = "Pavan Mishra",
+  founderName = "Pavan Kumar",
   founderRole = "Founder & CEO",
   founderImage,
   className = "",
