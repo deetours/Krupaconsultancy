@@ -1,0 +1,65 @@
+# ============================================================================
+# Netlify Configuration for Next.js SSR with API Routes
+# ============================================================================
+[build]
+  command = "npm run build"
+  publish = ".next"
+  functions = "netlify/functions"
+
+# ============================================================================
+# Environment Variables (set these in Netlify Dashboard)
+# ============================================================================
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# ============================================================================
+# Redirects and Rewrites
+# ============================================================================
+# Fallback to index for SPA routes (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  condition = {Path = ["!/api/*", "!/.netlify/*", "!/static/*"]}
+
+# ============================================================================
+# Cache Control Headers
+# ============================================================================
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+# ============================================================================
+# Next.js Plugin (enables SSR and API routes)
+# ============================================================================
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ============================================================================
+# Context-specific settings (optional)
+# ============================================================================
+[context.production]
+  command = "npm run build"
+  publish = ".next"
+
+[context.deploy-preview]
+  command = "npm run build"
+  publish = ".next"
+
+[context.branch-deploy]
+  command = "npm run build"
+  publish = ".next"
