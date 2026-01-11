@@ -1,0 +1,103 @@
+import type { Invoice, Client, GSTMonthlyData } from "./types"
+
+export const demoInvoices: Invoice[] = [
+  {
+    id: "1",
+    client_id: "c1",
+    invoice_number: "INV-001",
+    date: "2024-01-15",
+    supplier_gstin: "36AABCP1203R1Z0",
+    hsn_code: "6204",
+    taxable_value: 5000,
+    igst: 900,
+    cgst: 450,
+    sgst: 450,
+    confidence_score: { extraction: 0.98, validation: 0.95 },
+    status: "approved",
+    agent_explanation: "Standard invoice format, all fields valid",
+    file_url: "/invoices/inv-001.pdf",
+    created_at: "2024-01-15",
+  },
+  {
+    id: "2",
+    client_id: "c1",
+    invoice_number: "INV-002",
+    date: "2024-01-20",
+    supplier_gstin: "27AABCP1203R1Z0",
+    hsn_code: "6204",
+    taxable_value: 8000,
+    igst: 1440,
+    cgst: 720,
+    sgst: 720,
+    confidence_score: { extraction: 0.82, validation: 0.78 },
+    status: "review",
+    agent_explanation: "Missing HSN code, manual review needed",
+    file_url: "/invoices/inv-002.pdf",
+    created_at: "2024-01-20",
+  },
+  {
+    id: "3",
+    client_id: "c2",
+    invoice_number: "INV-003",
+    date: "2024-01-22",
+    supplier_gstin: "29AABCP1203R1Z0",
+    hsn_code: "1005",
+    taxable_value: 12000,
+    igst: 2160,
+    cgst: 1080,
+    sgst: 1080,
+    confidence_score: { extraction: 0.72, validation: 0.65 },
+    status: "pending",
+    agent_explanation: "Image quality low, requires verification",
+    file_url: "/invoices/inv-003.pdf",
+    created_at: "2024-01-22",
+  },
+]
+
+export const demoClients: Client[] = [
+  {
+    id: "c1",
+    name: "TechStart Solutions",
+    gstin: "36AABCP1203R1Z5",
+    turnover_band: "1-5cr",
+    filing_frequency: "monthly",
+    status: "active",
+    last_filing: "2024-01-10",
+    invoice_count: 2,
+  },
+  {
+    id: "c2",
+    name: "Green Manufacturing Ltd",
+    gstin: "27AABCP1203R1Z5",
+    turnover_band: ">5cr",
+    filing_frequency: "monthly",
+    status: "active",
+    last_filing: "2024-01-08",
+    invoice_count: 1,
+  },
+  {
+    id: "c3",
+    name: "Commerce Ventures",
+    gstin: "29AABCP1203R1Z5",
+    turnover_band: "<1cr",
+    filing_frequency: "quarterly",
+    status: "active",
+    last_filing: "2023-12-15",
+    invoice_count: 0,
+  },
+]
+
+export const demoGSTData: GSTMonthlyData[] = [
+  { month: "Aug", liability: 45000, itc: 32000 },
+  { month: "Sep", liability: 52000, itc: 38000 },
+  { month: "Oct", liability: 48000, itc: 35000 },
+  { month: "Nov", liability: 61000, itc: 42000 },
+  { month: "Dec", liability: 58000, itc: 40000 },
+  { month: "Jan", liability: 67000, itc: 45000 },
+]
+
+export const dashboardStats = {
+  needsDecision: 12,
+  forReview: 34,
+  autoProcessed: 156,
+}
