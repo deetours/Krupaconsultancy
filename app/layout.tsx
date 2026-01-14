@@ -7,7 +7,6 @@ import { ToastProvider } from "@/components/shared/toast-system"
 import { AnimationProvider } from "@/components/providers/AnimationProvider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { CursorFollower } from "@/components/ui/CursorFollower"
-import { GlowMenuDemo } from "@/components/ui/glow-menu-demo"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
@@ -47,9 +46,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <AnimationProvider>
             <Navigation />
-            <div className="px-6 md:px-12 pt-8 pb-4 bg-white border-b border-gray-100">
-              <GlowMenuDemo />
-            </div>
             <ToastProvider>{children}</ToastProvider>
             <CursorFollower />
           </AnimationProvider>
