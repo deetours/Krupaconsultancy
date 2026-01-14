@@ -96,7 +96,7 @@ export const ArrivalScene = () => {
         transition={{ duration: 1, delay: 3 }}
       >
         <span className="font-mono text-[10px] text-gray-300 tracking-widest uppercase">
-          Scroll
+          Scroll slowly
         </span>
         <motion.div
           className="w-px h-8 bg-linear-to-b from-gray-300 to-transparent"
