@@ -200,6 +200,7 @@ function CEOProfile() {
 }
 
 // Scene 5: Proof of Character
+function CharacterProof() {
   const [ref, isInView] = useInView({ threshold: 0.3 });
 
   return (
