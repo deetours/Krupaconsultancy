@@ -4,7 +4,23 @@ import { ApiResponse } from '@/lib/types/api'
 // API CLIENT - Handles all HTTP requests with authentication
 // ============================================================================
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
+// Determine API URL based on environment
+const getApiBaseUrl = () => {
+  // If explicitly set in environment, use that
+  if (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL
+  }
+  
+  // In browser, use relative path (will use same domain)
+  if (typeof window !== 'undefined') {
+    return '/api'
+  }
+  
+  // Server-side default
+  return 'http://localhost:3000/api'
+}
+
+const API_BASE_URL = getApiBaseUrl()
 
 export interface ApiClientOptions {
   headers?: Record<string, string>
